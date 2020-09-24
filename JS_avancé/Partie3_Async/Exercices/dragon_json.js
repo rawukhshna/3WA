@@ -1,47 +1,53 @@
 const fs = require('fs');
 
-// 1 ) 
-const getFiles = (file) => (new Promise((resolve, reject) => {
-    fs.readFile( file, { encoding: 'utf8' }, (err, data) => {
-        if (err) {
-            reject("File read failed:", err);
-            return;
+const readJSON = fileName => {
+    return new Promise(
+        (resolve, reject) => {
+            fs.readFile(fileName, { encoding: 'utf8' },
+                (err, data) => {
+                    if (err) {
+                        reject(new Error(err));
+                    } else {
+                        resolve(JSON.parse(data));
+                    }
+                });
         }
-        resolve(data);
-    });
-}));
+    );
+}
 
-getFiles('./data/dragons.json')
-    .then(data => console.log('File data:', JSON.parse(data)) )
-    .catch(err => console.log( err));
 
-// 2 )
+// 2 et 3
 
-getFiles('./data/dragons.json')
-    .then(data => {
-        const dragonsList = JSON.parse(data);
- 
-        const dragonsDSC = dragonsList.dragons.sort((a,b) => b.age - a.age)
-    
-        const oldestDragon = dragonsDSC[0]
+readJSON('./data/dragons.json')
+    .then( data  => {
+        const { dragons } = data;
 
-        console.log(`Le plus vieux dragon est ${oldestDragon.name}(${oldestDragon.age} ans).`)
-// 3
-        const youngestDragon = dragonsDSC[dragonsDSC.length -1]
-    
-        console.log(`Le plus jeune dragon est ${youngestDragon.name} (${youngestDragon.age} ans).`)
+        dragons.sort( (a, b) => a.age - b.age )
 
-// 4
-        console.log(dragonsDSC);
-        
+        const youngest = dragons[0];
+        const oldest = dragons[dragons.length];
+
+        return { 
+            youngest, 
+            oldest,
+            dragons
+        }
     })
-    .catch(err => console.log( err));
+    .then(data => console.log(data))
 
-/// RELATIONSHIPS
-const dragonsList = './data/dragons.json';
-const relationships = './data/relationships.json';
-Promise.all(dragonsList, relationships)
-    .then( data => {
-        console.log(getFiles(dragonsList))
-        console.log(getFiles(relationships))
-    })
+// 2 correction avancée
+// readJSON('./data/dragons.json')
+//     .then(({ dragons }) => {
+
+//         const maxAge = Math.max(...[...dragons.map(dragon => (dragon.age))]);
+//         const minAge = Math.min(...[...dragons.map(dragon => (dragon.age))]);
+
+//         const { age: oldestAge, name: oldestName } = dragons.filter(d => d.age === maxAge)[0];
+//         const { age: youngestAge, name: youngestName } = dragons.filter(d => d.age === minAge)[0];
+
+//         return {
+//             oldest: { age: oldestAge, name: oldestName },
+//             youngest: { age: youngestAge, name: youngestName }
+//         }
+//     })
+//     .then(data => console.log(data))
