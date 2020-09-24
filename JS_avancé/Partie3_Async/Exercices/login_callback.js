@@ -14,9 +14,8 @@ console.log(calcul(2, 3, (x,y) => x + y));
 
 const login = (email, password, callback ) => {
     setTimeout(() => {
-
-        
+        callback({email});
     }, 1000);
 }
 
-const email = login('alan@alan.fr', 1234567890);
+const email = login('alan@alan.fr', 1234567890, (email) => console.log(email));
