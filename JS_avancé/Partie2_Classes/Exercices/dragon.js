@@ -102,6 +102,10 @@ class Game {
             round ++;
         }
 
+        //Stats
+
+        console.log(`Combat terminé \n Nombre de tours: ${round} \n ${this._p1.name} : ${this._p1.life} points de vie \n ${this._p2.name} : ${this._p2.life} points de vie`);
+
         if(this._p1.life <= 0) {
 
             console.log(`Victoire de ${this._p2.name} en ${this._p2.shot} coups!`);
