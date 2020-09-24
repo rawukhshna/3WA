@@ -104,7 +104,24 @@ class Game {
 
         //Stats
 
-        console.log(`Combat terminé \n Nombre de tours: ${round} \n ${this._p1.name} : ${this._p1.life} points de vie \n ${this._p2.name} : ${this._p2.life} points de vie`);
+        const P1 = new Map();
+
+        P1.set('nom', this._p1.name);
+        P1.set('points de vie', this._p1.life);
+        P1.set('force', this._p1.force);
+        P1.set('nombre de coups portés', this._p1.shot);
+
+        const P2 = new Map();
+
+        P2.set('nom', this._p2.name);
+        P2.set('force', this._p2.force);
+        P2.set('points de vie', this._p2.life);
+        P2.set('nombre de coups portés', this._p2.shot);
+        
+
+        const statistics = {[this._p1.name] : P1, [this._p2.name] : P2, 'tours effectués' : round};
+
+        console.log(statistics);
 
         if(this._p1.life <= 0) {
 
