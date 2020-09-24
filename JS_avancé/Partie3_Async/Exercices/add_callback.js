@@ -15,11 +15,6 @@ const add = number => (new Promise((resolve, reject) => {
 add(1)
 .then( number => add(2 + number))
     
-.then( result => {
-        
-    console.log(`sum : ${result}`);
-        
-})
+.then( sum => console.log(`sum : ${sum}`))
 .catch(err => console.error(err))
    
-
