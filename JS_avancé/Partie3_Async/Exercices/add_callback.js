@@ -1,32 +1,25 @@
 
 // deux fonctions de callback : callback et error
-const add = (number, callback, error) => {
+const add = number => (new Promise((resolve, reject) => {
     setTimeout(() => {
         if(isNaN(parseInt(number))){
-            throw 'not a number';
+            reject(new Error('not a number'));
+            return;
         }
-        callback(number);
+        resolve(number);
     }, 1000);
-}
+    })
+);
 
 // premier appel de la fonction add
-add(1, number => { 
-    try {
+add(1)
+.then( number => add(2 + number))
+    
+.then( result => {
+        
+    console.log(`sum : ${result}`);
+        
+})
+.catch(err => console.error(err))
+   
 
-        let sum = number;
-        
-        add(2, number => { 
-            try {
-                sum += number;
-        
-                console.log(`sum : ${sum}`);
-            
-            } catch (e) {
-                console.error(e);
-            }
-        }
-        
-    } catch (e) {
-        console.error(e);
-    }
-});
