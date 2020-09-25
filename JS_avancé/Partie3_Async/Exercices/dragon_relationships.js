@@ -27,16 +27,20 @@ Promise.all([readJSON('./data/dragons.json'), readJSON('./data/relationships.jso
         let dragonRelations = [];
         for(relationship of relationships) {
             
-            let dragon = dragons.filter(dragon => dragon.id === relationship.id).shift().name;
+            const dragon = dragons.filter(dragon => dragon.id === relationship.id); //filter renvoie un tableau
+            const {name} = dragon[0];
             
-            let relations = [];
-            
-            for (relation of relationship.relation){
-                relations.push(dragons.filter(dragon => dragon.id === relation).shift().name);
+            const relations = [];
+            const {relation} = relationship;
+            //console.log(relation);
+            for (const id of relation){
+
+                const {name : dragonName} = dragons.filter(dragon => dragon.id === id)[0];
+                relations.push(dragonName);
                 
             }
-            dragonRelations.push({dragon, relations});
-
+            dragonRelations.push({name, relations});
+            //console.log(relationship);
         }
         console.log(dragonRelations);
 
