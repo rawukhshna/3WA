@@ -22,9 +22,7 @@ Promise.all([readJSON('./data/dragons.json'), readJSON('./data/relationships.jso
         const { relationships } = data[1];
 
         //console.log(dragons);
-        console.log(relationships);
-
-       
+        //console.log(relationships);
 
         let dragonRelations = [];
         for(relationship of relationships) {
@@ -32,11 +30,9 @@ Promise.all([readJSON('./data/dragons.json'), readJSON('./data/relationships.jso
             let dragon = dragons.filter(dragon => dragon.id === relationship.id).shift().name;
             
             let relations = [];
-            //console.log(relationship.relation)
+            
             for (relation of relationship.relation){
                 relations.push(dragons.filter(dragon => dragon.id === relation).shift().name);
-                //console.log(dragon.name);
-
                 
             }
             dragonRelations.push({dragon, relations});
