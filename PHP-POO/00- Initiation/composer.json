@@ -1,0 +1,13 @@
+{
+    "require": {
+        "phpunit/phpunit": "^9.4"
+    },
+    "require-dev": {
+        "spatie/phpunit-watcher": "^1.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "classes/"
+        }
+    }
+}

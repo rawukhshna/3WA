@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":274:{a:2:{s:7:"defects";a:1:{s:38:"EtudiantTest::testFirstNameIsUppercase";i:3;}s:5:"times";a:4:{s:28:"EtudiantTest::testAgeCorrect";d:0.008;s:26:"EtudiantTest::testAgeValid";d:0.006;s:28:"EtudiantTest::testAgeInvalid";d:0.001;s:38:"EtudiantTest::testFirstNameIsUppercase";d:0;}}}
