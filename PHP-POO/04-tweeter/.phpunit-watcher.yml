@@ -1,11 +1,14 @@
+hideManual: true
 watch:
   directories:
-    - .
-  fileMask: '*.php'
+    - src
+    - tests
+    - pages
+  fileMask: "*.php"
 notifications:
   passingTests: false
   failingTests: false
 phpunit:
   binaryPath: vendor/bin/phpunit
-  arguments: '--stop-on-failure --colors=always'
+  arguments: "--stop-on-failure"
   timeout: 180

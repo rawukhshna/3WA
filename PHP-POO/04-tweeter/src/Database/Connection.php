@@ -1,79 +1,67 @@
-<?php
-
+<?php 
 
 namespace Twitter\Database;
 
 use PDO;
 
-/**
- * Renvoie au PDO
- */
-class Connection
-{
-    protected string $host;
-    protected string $dbname;
-    protected string $user;
-    protected string $password;
-    protected int $port;
-    protected PDO $pdo;
 
-    /**
-     * fonction constructrice de la classe Connexion, permettant de définir les paramètres du PDO
-     *
-     * @param string $host
-     * @param string $dbname
-     * @param string $user
-     * @param string $password
-     * @param integer $port
-     */
-    public function __construct(string $host, string $dbname, string $user, string $password, int $port = 3306)
-    {
-        $this->host = $host;
-        $this->dbname = $dbname;
-        $this->user = $user;
-        $this->password = $password;
-        $this->port = $port;
+class Connection {
+
+  protected string $host;
+  protected string $dbname;
+  protected string $user;
+  protected string $password;
+  protected int $port;
+  protected PDO $pdo;
+
+  public function __construct(string $host, string $dbname, string $user, string $password, int $port = 3306)
+  {
+    $this->host = $host;
+    $this->dbname = $dbname;
+    $this->user = $user;
+    $this->password = $password;
+    $this->port = $port;
+  }
+ /**
+  * Retourne une instance de PDO en tenant compte de la configuration
+  *
+  * @return PDO
+  */
+  public function getPdo(): PDO 
+  {
+    if(empty($this->pdo)) {
+      $this->pdo = new PDO("mysql:host=$this->host;port=$this->port;dbname=$this->dbname;charset=utf8", $this->user, $this->password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+      ]);
     }
-    /**
-     * retourne le PDO
-     *
-     * @return PDO
-     */
-    public function getPdo(): PDO
-    {
-        if (empty($this->pdo)) {
-            $this->pdo = new PDO("mysql:host=$this->host;port=$this->port;dbname=$this->dbname;charset=UTF8", $this->user, $this->password, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-            ]);
-        }
+    
+    return $this->pdo;
+  }
 
+  public function execute(string $sql, array $params=[])
+  {
+    $pdo = $this->getPdo();
 
-        return $this->pdo;
-    }
+    $query = $pdo->prepare($sql);
 
-    public function execute(string $sql, array $params = [])
-    {
+    $query->execute($params);
 
-        $pdo = $this->getPDO();
+    return $query;
+  }
+  
+  public function getLastInsertId(): int
+  {
+    return $this->getPdo()->lastInsertId();
+  }
 
-        $query = $pdo->prepare($sql);
-        $query->execute($params);
+  public function query(string $sql, array $params=[])
+  {
+    return $this->execute($sql, $params)->fetch();
+  }
 
-        return $query;
-    }
+  public function queryAll(string $sql, array $params=[])
+  {
+    return $this->execute($sql, $params)->fetchAll();
+  }
 
-    public function query(string $sql, array $params = [])
-    {
-        return $this->execute($sql, $params)->fetch();
-    }
-
-    public function queryAll(string $sql, array $params = [])
-    {
-        return $this->execute($sql, $params)->fetchAll();
-    }
-
-    public function getLastInsertId()
-    {
-        return $this->getPdo()->lastInsertId();
-    }
 }

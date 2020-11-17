@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitbb4ac6875ae9610979ec8ff238535088
+class ComposerStaticInit18e84c8bc5d01b7458672cb651556ad5
 {
     public static $files = array (
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
@@ -35,6 +35,7 @@ class ComposerStaticInitbb4ac6875ae9610979ec8ff238535088
         'T' => 
         array (
             'Twitter\\' => 8,
+            'Tests\\' => 6,
         ),
         'S' => 
         array (
@@ -49,6 +50,8 @@ class ComposerStaticInitbb4ac6875ae9610979ec8ff238535088
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\Finder\\' => 25,
+            'Symfony\\Component\\DomCrawler\\' => 29,
+            'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Spatie\\PhpUnitWatcher\\' => 22,
         ),
@@ -99,6 +102,10 @@ class ComposerStaticInitbb4ac6875ae9610979ec8ff238535088
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
+        'Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -142,6 +149,14 @@ class ComposerStaticInitbb4ac6875ae9610979ec8ff238535088
         'Symfony\\Component\\Finder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
+        ),
+        'Symfony\\Component\\DomCrawler\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dom-crawler',
+        ),
+        'Symfony\\Component\\CssSelector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/css-selector',
         ),
         'Symfony\\Component\\Console\\' => 
         array (
@@ -814,10 +829,10 @@ class ComposerStaticInitbb4ac6875ae9610979ec8ff238535088
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitbb4ac6875ae9610979ec8ff238535088::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitbb4ac6875ae9610979ec8ff238535088::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitbb4ac6875ae9610979ec8ff238535088::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitbb4ac6875ae9610979ec8ff238535088::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit18e84c8bc5d01b7458672cb651556ad5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit18e84c8bc5d01b7458672cb651556ad5::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit18e84c8bc5d01b7458672cb651556ad5::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit18e84c8bc5d01b7458672cb651556ad5::$classMap;
 
         }, null, ClassLoader::class);
     }
